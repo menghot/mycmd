@@ -1,3 +1,15 @@
 GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build
 
 
+In your project directory (where your main.go file is) you would run the following:
+
+cobra add serve
+cobra add config
+cobra add create -p 'configCmd'
+cobra add supports all the same optional flags as cobra init does (described above).
+
+You'll notice that this final command has a -p flag. This is used to assign a parent command to the newly added command. In this case, we want to assign the "create" command to the "config" command. All commands have a default parent of rootCmd if not specified.
+
+By default cobra will append Cmd to the name provided and uses this name for the internal variable name. When specifying a parent, be sure to match the variable name used in the code.
+
+Note: Use camelCase (not snake_case/kebab-case) for command names. Otherwise, you will encounter errors. For example, cobra add add-user is incorrect, but cobra add addUser is valid.
